@@ -1,5 +1,6 @@
 const botgram = require("botgram")
 const bot = botgram(process.env.TELEGRAM_BOT_TOKEN)
+var http = require('http');
 
 function rollDice(sides) {
     return Math.round(Math.random() * (sides - 1) + 1);
@@ -36,7 +37,8 @@ bot.command((msg, reply) =>
 )
 
 var server_port = process.env.YOUR_PORT || process.env.PORT || 80;
-var server_host = process.env.YOUR_HOST || '0.0.0.0';
-server.listen(server_port, server_host, function () {
-    console.log('Listening on port %d', server_port);
-});
+http.createServer(function (req, res) {
+    res.writeHead(200, { 'Content-Type': 'text/plain' });
+    res.write('Че ты тут забыл, наркоман?');
+    res.end();
+}).listen(server_port);
