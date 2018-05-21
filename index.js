@@ -13,17 +13,17 @@ function rollDices(count, sides) {
 }
 
 bot.command("strike", (msg, reply) => {
-    var text = msg.args(1) || "зачеркнутый текст";
+    var text = msg.args(1)[0] || "зачеркнутый текст";
     var replyText = '̶';
-    text[0].split('').forEach(element => {
+    text.split('').forEach(element => {
         replyText += element + '̶';
     });
     reply.text(replyText)
 })
 
 bot.command("roll", (msg, reply) => {
-    var roll = msg.args(1) || "1d6";
-    var [count, sides] = roll[0].split('d');
+    var roll = msg.args(1)[0] || "1d6";
+    var [count, sides] = roll.split('d');
 
     var results = rollDices(count, sides);
     var replyText = (msg.from.firstname && (msg.from.firstname + " ")) + (msg.from.lastname && (msg.from.lastname + " ")) + "бросает " + roll + ", результат: " + results;
