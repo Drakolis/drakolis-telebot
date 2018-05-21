@@ -24,6 +24,10 @@ function isNumber(n) {
   return !isNaN(parseFloat(n)) && isFinite(n);
 }
 
+bot.command("reset", (msg, reply) => {
+    reply.keyboard().text("Сброс успешен.");
+})
+
 bot.command("start", "help", (msg, reply) => {
     reply.text(`Я могу:
     Писать этот гайд: /start или /help
