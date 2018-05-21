@@ -23,7 +23,7 @@ bot.command("strike", (msg, reply) => {
 
 bot.command("roll", (msg, reply) => {
     var roll = msg.args(1);
-    var [count, sides] = roll.split('d');
+    var [count, sides] = roll[0].split('d');
 
     var results = rollDices(count, sides);
     var replyText = (msg.from.firstname && (msg.from.firstname + " ")) + (msg.from.lastname && (msg.from.lastname + " ")) + "бросает " + roll + ", результат: " + results;
