@@ -20,6 +20,10 @@ function rollDices(count, sides) {
     return results;
 }
 
+function isNumber(n) {
+  return !isNaN(parseFloat(n)) && isFinite(n);
+}
+
 bot.command("start", "help", (msg, reply) => {
     reply.text(`Я могу:
     Писать этот гайд: /start или /help
@@ -33,7 +37,7 @@ bot.command("start", "help", (msg, reply) => {
 
 bot.command("e621", (msg, reply) => {
     var tags = msg.args(1)[0];
-
+    var limit = 10; //TEMP
     request.get("https://e621.net/post/index.json?limit=" + limit + "&tags=" + tags, null, (err, resp, body) => {
         var images = resp.data.map(item => { return item.file_url });
         images.forEach(element => { reply.text(element) });
@@ -53,7 +57,7 @@ bot.command("roll", (msg, reply) => {
     var roll = msg.args(1)[0] || "1d6";
     try {
         var [count, sides] = roll.split('d');
-        if (!count || !sides) {
+        if (!count || !sides || isNumber(count) || isNumber(sides)) {
             throw new Error();
         }
         var results = rollDices(count, sides);
