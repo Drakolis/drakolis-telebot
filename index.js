@@ -49,7 +49,7 @@ bot.command("decide", (msg, reply) => {
         reply.text("Введите хотябы ДВА варианта для выбора через запятую");
 
     var optionId = rollDice(options.length) - 1;
-    reply.text("Лично я бы выбрал '" + options[optionId] + "'");
+    reply.text("Лично я бы выбрал '" + options[optionId].trim() + "'");
  })
 
 bot.command((msg, reply) =>
