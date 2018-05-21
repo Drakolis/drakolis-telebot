@@ -6,7 +6,7 @@ const axios = require('axios');
 const e621IndexUrl = "https://e621.net/post/index.json";
 
 function senderName(msg) {
-    return (msg.from.firstname && (msg.from.firstname + " ")) + (msg.from.lastname && (msg.from.lastname + " "));
+    return msg.from.name;
 }
 
 function rollDice(sides) {
@@ -53,6 +53,11 @@ bot.command("e621", (msg, reply) => {
         .catch(error => {
             console.log(error);
         });
+})
+
+bot.command("shporn", (msg, reply) => {
+    reply.keyboard([["Кнопка хуёпка", "Кнопочка пиздопочка"]])
+    reply.keyboard([["1110101010", "00101010101"]])
 })
 
 bot.command("strike", (msg, reply) => {
