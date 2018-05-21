@@ -30,14 +30,21 @@ bot.command("start", "help", (msg, reply) => {
     Зачеркивать текст: /strike <текст для зачеркивания>
     Кидать кубики: /roll <количество>d<стороны>
     Принимать решения: /decide <опция1>,<опция2>,..,<опцияN>
-    Искать фуревое порно: /e621 <теги>
+    Искать фуревое порно: /e621 <ограничение> <теги>
 Больше я ничего не знаю.
     `)
 })
 
 bot.command("e621", (msg, reply) => {
-    var tags = msg.args(1)[0];
-    var limit = 10; //TEMP
+    var args = msg.args(2);
+    var tags = args[1];
+    var limit = args[0];
+
+    if (!isNumber(limit)) {
+        tags = limit + " " + tags;
+        limit = 10;
+    }
+
     axios.get("https://e621.net/post/index.json?limit=" + limit + "&tags=" + tags)
         .then(response => {
             var images = response.data.map(item => { return item.file_url });
