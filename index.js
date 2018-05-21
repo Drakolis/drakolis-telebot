@@ -2,7 +2,7 @@ const botgram = require("botgram")
 const bot = botgram(process.env.TELEGRAM_BOT_TOKEN)
 
 function rollDice(sides) {
-    return Math.random() * (sides - 1) + 1;
+    return Math.round(Math.random() * (sides - 1) + 1);
 }
 
 function rollDices(count, sides) {
