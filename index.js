@@ -17,6 +17,16 @@ function rollDices(count, sides) {
     return results;
 }
 
+bot.command("start", "help", (msg, reply) => {
+    reply.text(`Я могу:
+    Писать этот гайд: __/start__ или __/help__
+    Зачеркивать текст: __/strike <текст для зачеркивания>__
+    Кидать кубики: __/roll <количество>d<стороны>__
+    Принимать решения: __/decide <опция1>,<опция2>,..,<опцияN>__
+    Больше я ничего не знаю.
+    `)
+})
+
 bot.command("strike", (msg, reply) => {
     var text = msg.args(1)[0] || "зачеркнутый текст";
     var replyText = '̶';
@@ -44,7 +54,7 @@ bot.command("roll", (msg, reply) => {
 })
 
 bot.command("decide", (msg, reply) => {
-    var options = msg.args(1)[0].split(',');
+    var options = msg.args(1)[0].split(',') || ["1"];
     if (options.length < 2)
         reply.text("Введите хотябы ДВА варианта для выбора через запятую");
 
