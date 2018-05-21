@@ -30,13 +30,15 @@ bot.command("roll", (msg, reply) => {
     var roll = msg.args(1)[0] || "1d6";
     try {
         var [count, sides] = roll.split('d');
-
+        if (!count || !sides) {
+            throw new Error();
+        }
         var results = rollDices(count, sides);
         var replyText = senderName(msg) + "бросает " + roll + ", результат: " + results;
 
         reply.text(replyText)
     }
-    catch {
+    catch (err) {
         reply.text(senderName(msg) + "бросает какую-то херню, результат: " + senderName(msg) + " - наркоман")
     }
 })
