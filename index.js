@@ -55,8 +55,7 @@ bot.command("roll", (msg, reply) => {
 
 bot.command("decide", (msg, reply) => {
     var options = (msg.args(1)[0] || "1").split(',');
-    if (options.length < 2)
-        reply.text("Введите хотябы ДВА варианта для выбора через запятую");
+    if (options.length < 2) { reply.text("Введите хотябы ДВА варианта для выбора через запятую"); return; }
 
     var optionId = rollDice(options.length) - 1;
     reply.text("Лично я бы выбрал '" + options[optionId].trim() + "'");
