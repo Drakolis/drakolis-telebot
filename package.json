@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/DrakonLisowski/drakolis-telebot#readme",
   "dependencies": {
-    "botgram": "^2.1.0"
+    "botgram": "^2.1.0",
+    "request": "^2.87.0"
   }
 }
