@@ -5,13 +5,6 @@ const request = require('request');
 
 const e621IndexUrl = "https://e621.net/post/index.json";
 
-function getE621Images(tags, limit=10) {
-    request.get("https://e621.net/post/index.json?limit=" + limit + "&tags=" + tags, null, (err, resp, body) => {
-        return resp.data.map(item => { return item.file_url });
-    });
-
-}
-
 function senderName(msg) {
     return (msg.from.firstname && (msg.from.firstname + " ")) + (msg.from.lastname && (msg.from.lastname + " "));
 }
@@ -40,8 +33,11 @@ bot.command("start", "help", (msg, reply) => {
 
 bot.command("e621", (msg, reply) => {
     var tags = msg.args(1)[0];
-    var images = getE621Images(tags);
-    images.forEach(element => { reply.text(element) });
+
+    request.get("https://e621.net/post/index.json?limit=" + limit + "&tags=" + tags, null, (err, resp, body) => {
+        var images = resp.data.map(item => { return item.file_url });
+        images.forEach(element => { reply.text(element) });
+    });
 })
 
 bot.command("strike", (msg, reply) => {
