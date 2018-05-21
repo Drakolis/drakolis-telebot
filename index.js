@@ -3,9 +3,9 @@ const bot = botgram(process.env.TELEGRAM_BOT_TOKEN)
 
 bot.command("strike", (msg, reply) => {
     var text = msg.args(1);
-    var replyText = "";
+    var replyText = "̶";
     text[0].split('').forEach(element => {
-        replyText += "̶" + element;
+        replyText += element + "̶";
     });
     reply.text(replyText)
 })
