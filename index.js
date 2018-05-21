@@ -1,7 +1,7 @@
 const botgram = require("botgram")
 const bot = botgram(process.env.TELEGRAM_BOT_TOKEN)
 const http = require('http');
-const request = require('request');
+const axios = require('axios');
 
 const e621IndexUrl = "https://e621.net/post/index.json";
 
@@ -38,11 +38,14 @@ bot.command("start", "help", (msg, reply) => {
 bot.command("e621", (msg, reply) => {
     var tags = msg.args(1)[0];
     var limit = 10; //TEMP
-    request.get("https://e621.net/post/index.json?limit=" + limit + "&tags=" + tags, null, (err, resp, body) => {
-        console.log(body);
-        var images = body.map(item => { return item.file_url });
-        images.forEach(element => { reply.text(element) });
-    });
+    axios.get("https://e621.net/post/index.json?limit=" + limit + "&tags=" + tags)
+        .then(response => {
+            var images = response.data.map(item => { return item.file_url });
+            images.forEach(element => { reply.text(element) });
+        })
+        .catch(error => {
+            console.log(error);
+        });
 })
 
 bot.command("strike", (msg, reply) => {
