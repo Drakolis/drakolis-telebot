@@ -56,8 +56,8 @@ bot.command("e621", (msg, reply) => {
 })
 
 bot.command("shporn", (msg, reply) => {
-    reply.keyboard([["Кнопка хуёпка", "Кнопочка пиздопочка"]])
-    reply.keyboard([["1110101010", "00101010101"]])
+    reply.keyboard([["Кнопка хуёпка", "Кнопочка пиздопочка"]]).text("зачеркнутый текст");
+    reply.keyboard([["1110101010", "00101010101"]]).text("зачеркнутый текст");
 })
 
 bot.command("strike", (msg, reply) => {
