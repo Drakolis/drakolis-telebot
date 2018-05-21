@@ -22,7 +22,7 @@ bot.command("strike", (msg, reply) => {
 })
 
 bot.command("roll", (msg, reply) => {
-    var roll = msg.args(1) || "1d6;
+    var roll = msg.args(1) || "1d6";
     var [count, sides] = roll[0].split('d');
 
     var results = rollDices(count, sides);
