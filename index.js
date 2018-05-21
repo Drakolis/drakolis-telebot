@@ -1,6 +1,10 @@
 const botgram = require("botgram")
 const bot = botgram(process.env.TELEGRAM_BOT_TOKEN)
-var http = require('http');
+const http = require('http');
+
+function senderName(msg) {
+    return (msg.from.firstname && (msg.from.firstname + " ")) + (msg.from.lastname && (msg.from.lastname + " "));
+}
 
 function rollDice(sides) {
     return Math.round(Math.random() * (sides - 1) + 1);
@@ -24,12 +28,17 @@ bot.command("strike", (msg, reply) => {
 
 bot.command("roll", (msg, reply) => {
     var roll = msg.args(1)[0] || "1d6";
-    var [count, sides] = roll.split('d');
+    try {
+        var [count, sides] = roll.split('d');
 
-    var results = rollDices(count, sides);
-    var replyText = (msg.from.firstname && (msg.from.firstname + " ")) + (msg.from.lastname && (msg.from.lastname + " ")) + "бросает " + roll + ", результат: " + results;
+        var results = rollDices(count, sides);
+        var replyText = senderName(msg) + "бросает " + roll + ", результат: " + results;
 
-    reply.text(replyText)
+        reply.text(replyText)
+    }
+    catch {
+        reply.text(senderName(msg) + "бросает какую-то херню, результат: " + senderName(msg) + " - наркоман")
+    }
 })
 
 bot.command((msg, reply) =>
